@@ -25,6 +25,7 @@ Grafana and Chronograf offer HTTP UIs that can be accessed with the browser.
 - docker
 - docker-compose
 - python 3
+- [Adafruit blinka](https://learn.adafruit.com/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging/python-setup)
 
 ## Needed environment variables to run:
 
