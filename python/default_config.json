@@ -1,0 +1,11 @@
+{
+  "influxDB": {
+    "hostname": "192.168.2.113",
+    "port": 8086,
+    "username": "alvaro",
+    "passwordEnvName": "INFLUXDB_PASSWORD",
+    "database": "monitoring"
+  },
+  "timeGranularityInSeconds": 5,
+  "logLevel": "INFO"
+}
