@@ -1,5 +1,5 @@
 import adafruit_dht
-import adafruit_blinka.board as board
+import board as board
 
 from monitoring.value_monitor import ValueMonitor
 
