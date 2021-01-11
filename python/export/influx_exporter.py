@@ -27,7 +27,7 @@ class InfluxExporter(Exporter):
         self.database = database
 
     def export_value(self, measurement: Measurement):
-        bucket = f"{self.database}/autogen"
+        bucket = f"{self.database}/1d"
         point = ToInfluxPoint.parse(measurement)
         print("Writing point: " + str(point.to_line_protocol()) + " to bucket " + bucket)
         self.client.write(bucket=bucket, record=point)
