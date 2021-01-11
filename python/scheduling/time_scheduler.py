@@ -33,8 +33,8 @@ class TimeScheduler(Scheduler):
             return None
 
     @staticmethod
-    def _safe_export(self, named_monitor: NamedMonitor, exporter: Exporter, current_time: datetime):
-        value = self._safe_read(named_monitor)
+    def _safe_export(named_monitor: NamedMonitor, exporter: Exporter, current_time: datetime):
+        value = TimeScheduler._safe_read(named_monitor)
         if value is not None:
             try:
                 exporter.export_value(Measurement(named_monitor.metric_name, {}, value, current_time))
