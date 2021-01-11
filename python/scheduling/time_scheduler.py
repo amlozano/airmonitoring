@@ -1,6 +1,8 @@
 import logging
 import time
-from typing import List
+from datetime import datetime
+from numbers import Number
+from typing import List, Optional
 
 from data.measurement import Measurement
 from data.named_monitor import NamedMonitor
@@ -22,17 +24,29 @@ class TimeScheduler(Scheduler):
         self.periodicity_seconds = periodicity_seconds
         self.current_time_provider = current_time_provider
 
+    @staticmethod
+    def _safe_read(named_monitor: NamedMonitor) -> Optional[Number]:
+        try:
+            return named_monitor.monitor.get_value()
+        except RuntimeError as err:
+            logging.error(f"Error trying to read {named_monitor.metric_name}: {err}")
+            return None
+
+    @staticmethod
+    def _safe_export(self, named_monitor: NamedMonitor, exporter: Exporter, current_time: datetime):
+        value = self._safe_read(named_monitor)
+        if value is not None:
+            try:
+                exporter.export_value(Measurement(named_monitor.metric_name, {}, value, current_time))
+            except ConnectionError as err:
+                logging.error(f"Error trying to export values: {err}")
+
     def start(self):
         while True:
             current_time = self.current_time_provider.get_current_time()
             logging.info("Updating measurements for time " + current_time.isoformat() + " ...")
             for named_monitor in self.monitors:
-                value = named_monitor.monitor.get_value()
-                try:
-                    self.exporter.export_value(
-                        Measurement(named_monitor.metric_name, {}, value, current_time))
-                except ConnectionError as err:
-                    logging.error("Error trying to export values: {0}".format(err))
+                self._safe_export(named_monitor, self.exporter, current_time)
 
             logging.info("Measurements updated")
             time.sleep(self.periodicity_seconds)
