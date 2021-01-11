@@ -6,6 +6,6 @@
     "passwordEnvName": "INFLUXDB_PASSWORD",
     "database": "monitoring"
   },
-  "timeGranularityInSeconds": 5,
+  "timeGranularityInSeconds": 10,
   "logLevel": "INFO"
 }

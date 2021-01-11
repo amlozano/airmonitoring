@@ -7,6 +7,8 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 from data.named_monitor import NamedMonitor
 from export.influx_exporter import InfluxExporter
+from monitoring.dht11_humidity_monitor import Dht11HumidityMonitor
+from monitoring.dht11_temperature_monitor import Dht11TemperatureMonitor
 from monitoring.temperature_monitor import RandomTemperatureMonitor
 from scheduling.current_time_provider import DatetimeCurrentTimeProvider
 from scheduling.time_scheduler import TimeScheduler
@@ -36,7 +38,9 @@ def main():
 
         scheduler = TimeScheduler(
             [
-                NamedMonitor("fake_temperature", RandomTemperatureMonitor())
+                NamedMonitor("fake_temperature", RandomTemperatureMonitor()),
+                NamedMonitor("dht11_temperature", Dht11TemperatureMonitor()),
+                NamedMonitor("dht11_humidity", Dht11HumidityMonitor())
             ],
             influx_exporter,
             config["timeGranularityInSeconds"],
