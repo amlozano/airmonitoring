@@ -1,11 +1,9 @@
-import adafruit_dht
-import board as board
-
+from monitoring.dht11 import Dht11
 from monitoring.value_monitor import ValueMonitor
 
 
 class Dht11HumidityMonitor(ValueMonitor):
-    _dhtDevice = adafruit_dht.DHT11(board.D4)
+    _dhtDevice = Dht11.dhtDevice
 
     def get_value(self) -> float:
         return self._dhtDevice.humidity
