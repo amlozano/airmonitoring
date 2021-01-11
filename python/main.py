@@ -38,7 +38,6 @@ def main():
 
         scheduler = TimeScheduler(
             [
-                NamedMonitor("fake_temperature", RandomTemperatureMonitor()),
                 NamedMonitor("dht11_temperature", Dht11TemperatureMonitor()),
                 NamedMonitor("dht11_humidity", Dht11HumidityMonitor())
             ],
