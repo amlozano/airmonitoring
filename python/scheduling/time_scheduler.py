@@ -29,7 +29,7 @@ class TimeScheduler(Scheduler):
         try:
             return named_monitor.monitor.get_value()
         except RuntimeError as err:
-            logging.error(f"Error trying to read {named_monitor.metric_name}: {err}")
+            print(f"Error trying to read {named_monitor.metric_name}: {err}")
             return None
 
     @staticmethod
@@ -39,14 +39,14 @@ class TimeScheduler(Scheduler):
             try:
                 exporter.export_value(Measurement(named_monitor.metric_name, {}, value, current_time))
             except ConnectionError as err:
-                logging.error(f"Error trying to export values: {err}")
+                print(f"Error trying to export values: {err}")
 
     def start(self):
         while True:
             current_time = self.current_time_provider.get_current_time()
-            logging.info("Updating measurements for time " + current_time.isoformat() + " ...")
+            print("Updating measurements for time " + current_time.isoformat() + " ...")
             for named_monitor in self.monitors:
                 self._safe_export(named_monitor, self.exporter, current_time)
 
-            logging.info("Measurements updated")
+            print("Measurements updated")
             time.sleep(self.periodicity_seconds)
