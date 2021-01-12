@@ -3,7 +3,8 @@ Air monitoring tool to run on raspberry pi.
 
 It is composed of several modules that report data from different sensors to an InfluxDB database:
 
-- Temperature and humidity sensor (DHT11). The code expects it to be placed on GPIO4
+- Temperature and humidity sensor (DHT11). The code expects it to be placed at GPIO4
+- Temperature and humidity sensor (DHT22). The code expects it to be placed at GPIO22 
 - (not present yet) CO2 sensor
 
 To work properly, these sensors should be added to the raspberry pi GPIO.
