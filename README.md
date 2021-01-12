@@ -39,7 +39,12 @@ Grafana and Chronograf offer HTTP UIs that can be accessed with the browser.
 ## Run with
 
 ```bash
-./run.sh
+./run_services.sh
+./run_monitors.sh
 ```
 
+## Future improvements
+- Dockerize monitors
+- Extract GPIO pin selection for the sensors to the configuration file
+- Setup proper logging
 
