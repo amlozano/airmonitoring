@@ -36,7 +36,7 @@ Grafana and Chronograf offer HTTP UIs that can be accessed with the browser.
 | GRAFANA_USERNAME  | Grafana admin username  |
 | GRAFANA_PASSWORD  | Grafana admin password  |
 
-They can be setup iside `~/.secrets/monitoring.sh`:
+They can be setup iside `~/.secrets/monitoring.sh`, (where the run command will look for them):
 
 ```bash
 export INFLUXDB_USERNAME=blah
