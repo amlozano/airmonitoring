@@ -1,4 +1,4 @@
-from monitoring.dht11 import Dht11
+from monitoring.sensors import Dht11
 from monitoring.value_monitor import ValueMonitor
 
 
