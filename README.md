@@ -3,7 +3,7 @@ Air monitoring tool to run on raspberry pi.
 
 It is composed of several modules that report data from different sensors to an InfluxDB database:
 
-- (not present yet) Temperature and humidity sensor
+- Temperature and humidity sensor (DHT11)
 - (not present yet) CO2 sensor
 
 To work properly, these sensors should be added to the raspberry pi GPIO.
@@ -47,4 +47,5 @@ Grafana and Chronograf offer HTTP UIs that can be accessed with the browser.
 - Dockerize monitors
 - Extract GPIO pin selection for the sensors to the configuration file
 - Setup proper logging
+- Initialize InfluxDB database within the run commands.
 
