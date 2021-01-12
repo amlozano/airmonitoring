@@ -39,9 +39,9 @@ def main():
 
         scheduler = TimeScheduler(
             [
-                NamedMonitor("dht11_temperature", Dht11TemperatureMonitor()),
+                # NamedMonitor("dht11_temperature", Dht11TemperatureMonitor()),
                 NamedMonitor("dht22_temperature", Dht22TemperatureMonitor()),
-                NamedMonitor("dht11_humidity", Dht11HumidityMonitor()),
+                # NamedMonitor("dht11_humidity", Dht11HumidityMonitor()),
                 NamedMonitor("dht22_humidity", Dht22HumidityMonitor())
             ],
             influx_exporter,
