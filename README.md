@@ -5,7 +5,7 @@ It is composed of several modules that report data from different sensors to an 
 
 - Temperature and humidity sensor (DHT11). The code expects it to be placed at GPIO4
 - Temperature and humidity sensor (DHT22). The code expects it to be placed at GPIO22 
-- (not present yet) CO2 sensor
+- MHZ-19 CO2 sensor. The code expects to have the RxD placed at GPIO14 and TxD placed at GPIO15
 
 To work properly, these sensors should be added to the raspberry pi GPIO.
 If you want to extend the functionality with other metrics, you need to create a child of [ValueMonitor](python/monitoring/value_monitor.py), see [TemperatureMonitor](python/monitoring/temperature_monitor.py) as example.

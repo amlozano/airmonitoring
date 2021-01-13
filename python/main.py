@@ -11,6 +11,7 @@ from monitoring.dht11_humidity_monitor import Dht11HumidityMonitor
 from monitoring.dht11_temperature_monitor import Dht11TemperatureMonitor
 from monitoring.dht22_humidity_monitor import Dht22HumidityMonitor
 from monitoring.dht22_temperature_monitor import Dht22TemperatureMonitor
+from monitoring.mhz19_co2_monitor import Mhz19Co2Monitor
 from scheduling.current_time_provider import DatetimeCurrentTimeProvider
 from scheduling.time_scheduler import TimeScheduler
 
@@ -42,7 +43,8 @@ def main():
                 NamedMonitor("dht11_temperature", Dht11TemperatureMonitor()),
                 NamedMonitor("dht22_temperature", Dht22TemperatureMonitor()),
                 NamedMonitor("dht11_humidity", Dht11HumidityMonitor()),
-                NamedMonitor("dht22_humidity", Dht22HumidityMonitor())
+                NamedMonitor("dht22_humidity", Dht22HumidityMonitor()),
+                NamedMonitor("mhz19_co2", Mhz19Co2Monitor())
             ],
             influx_exporter,
             config["timeGranularityInSeconds"],
