@@ -54,9 +54,5 @@ export GRAFANA_PASSWORD=blah
 ```
 
 ## Future improvements
-- Dockerize monitors
-- Extract GPIO pin selection for the sensors to the configuration file
-- Setup proper logging
-- Initialize InfluxDB database within the run commands
-- Extract monitor setupt to the config.json
+Added to Issues
 
