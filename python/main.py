@@ -47,7 +47,7 @@ def main():
         influx_exporter = InfluxExporter(influx_client.write_api(write_options=SYNCHRONOUS), influx_database)
 
         monitors_config = config["monitors"]
-        monitors = list(map(lambda mon: NamedMonitor(mon["name"], _get_class(mon["class"])), monitors_config))
+        monitors = list(map(lambda mon: NamedMonitor(mon["name"], _get_class(mon["class"])()), monitors_config))
 
         scheduler = TimeScheduler(
             monitors,

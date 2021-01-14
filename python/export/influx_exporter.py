@@ -1,8 +1,7 @@
-import logging
 from typing import List
 
 from influxdb_client import Point
-from influxdb_client.client.write_api import SYNCHRONOUS, WriteApi
+from influxdb_client.client.write_api import WriteApi
 
 from data.measurement import Measurement
 from export.exporter import Exporter
