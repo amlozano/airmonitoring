@@ -7,5 +7,22 @@
     "database": "monitoring"
   },
   "timeGranularityInSeconds": 10,
-  "logLevel": "INFO"
+  "monitors": [
+    {
+      "name": "dht11_temperature",
+      "class": "monitoring.dht11_temperature_monitor.Dht11TemperatureMonitor"
+    },
+    {
+      "name": "dht22_temperature",
+      "class": "monitoring.dht22_temperature_monitor.Dht22TemperatureMonitor"
+    },
+    {
+      "name": "dht11_humidity",
+      "class": "monitoring.dht11_humidity_monitor.Dht11HumidityMonitor"
+    },
+    {
+      "name": "dht22_humidity",
+      "class": "monitoring.dht22_humidity_monitor.Dht22HumidityMonitor"
+    }
+  ]
 }

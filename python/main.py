@@ -15,6 +15,15 @@ from scheduling.current_time_provider import DatetimeCurrentTimeProvider
 from scheduling.time_scheduler import TimeScheduler
 
 
+def _get_class(kls):
+    parts = kls.split('.')
+    module = ".".join(parts[:-1])
+    m = __import__(module)
+    for comp in parts[1:]:
+        m = getattr(m, comp)
+    return m
+
+
 def main():
     config_location = 'default_config.json'
     if len(sys.argv) > 1:
@@ -37,13 +46,11 @@ def main():
 
         influx_exporter = InfluxExporter(influx_client.write_api(write_options=SYNCHRONOUS), influx_database)
 
+        monitors_config = config["monitors"]
+        monitors = list(map(lambda mon: NamedMonitor(mon["name"], _get_class(mon["class"])()), monitors_config))
+
         scheduler = TimeScheduler(
-            [
-                NamedMonitor("dht11_temperature", Dht11TemperatureMonitor()),
-                NamedMonitor("dht22_temperature", Dht22TemperatureMonitor()),
-                NamedMonitor("dht11_humidity", Dht11HumidityMonitor()),
-                NamedMonitor("dht22_humidity", Dht22HumidityMonitor())
-            ],
+            monitors,
             influx_exporter,
             config["timeGranularityInSeconds"],
             DatetimeCurrentTimeProvider())
