@@ -7,7 +7,6 @@
     "database": "monitoring"
   },
   "timeGranularityInSeconds": 10,
-  "logLevel": "INFO",
   "monitors": [
     {
       "name": "dht11_temperature",
