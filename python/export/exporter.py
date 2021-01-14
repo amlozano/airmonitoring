@@ -8,5 +8,5 @@ class Exporter(ABC):
     def export_value(self, measurement: Measurement):
         pass
 
-    def close(self):
+    def flush(self):
         pass
