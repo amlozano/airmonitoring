@@ -23,6 +23,10 @@
     {
       "name": "dht22_humidity",
       "class": "monitoring.dht22_humidity_monitor.Dht22HumidityMonitor"
+    },
+    {
+      "name": "ccs811_CO2",
+      "class": "monitoring.ccs811_co2_monitor.Ccs811Co2Monitor"
     }
   ]
 }
