@@ -5,8 +5,10 @@ import sys
 from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
+from app.air_monitoring_app import AirMonitoringApp
 from data.named_monitor import NamedMonitor
 from export.influx_exporter import InfluxExporter
+from export.write_api_proxy import WriteApiProxy, InfluxWriteApiProxy
 from monitoring.dht11_humidity_monitor import Dht11HumidityMonitor
 from monitoring.dht11_temperature_monitor import Dht11TemperatureMonitor
 from monitoring.dht22_humidity_monitor import Dht22HumidityMonitor
@@ -44,16 +46,14 @@ def main():
             token=f'{influx_username}:{influx_password}',
             org='-')
 
-        influx_exporter = InfluxExporter(influx_client.write_api(write_options=SYNCHRONOUS), influx_database)
+        influx_exporter = InfluxExporter(
+            InfluxWriteApiProxy(influx_client.write_api(write_options=SYNCHRONOUS)), influx_database)
 
         monitors_config = config["monitors"]
         monitors = list(map(lambda mon: NamedMonitor(mon["name"], _get_class(mon["class"])()), monitors_config))
 
-        scheduler = TimeScheduler(
-            monitors,
-            influx_exporter,
-            config["timeGranularityInSeconds"],
-            DatetimeCurrentTimeProvider())
+        updater = AirMonitoringApp(monitors, influx_exporter, DatetimeCurrentTimeProvider())
+        scheduler = TimeScheduler(updater, config["timeGranularityInSeconds"])
 
         scheduler.start()
 
